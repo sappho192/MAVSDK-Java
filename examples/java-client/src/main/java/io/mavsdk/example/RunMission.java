@@ -24,7 +24,7 @@ public class RunMission {
   public static void main(String[] args) {
     logger.debug("Starting example: mission...");
 
-    string SERVER_IP = "172.0.0.1";
+    String SERVER_IP = "172.0.0.1";
     int SERVER_PORT = 50051;
     System drone = new System(SERVER_IP, SERVER_PORT);
 
