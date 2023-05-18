@@ -29,7 +29,7 @@ public class DroneInfo {
         var position = telemetry.getPosition().blockingFirst();
         logger.debug("Latitude degree: " + position.getLatitudeDeg());
         logger.debug("Longitude degree: " + position.getLongitudeDeg());
-        logger.debug("Absolute altitude (meter)): " + position.getAbsoluteAltitudeM());
+        logger.debug("Absolute altitude (meter): " + position.getAbsoluteAltitudeM());
         logger.debug("Relative altitude (meter): " + position.getRelativeAltitudeM());
 
         // not working under blocking condition
@@ -42,6 +42,17 @@ public class DroneInfo {
         logger.debug("Indicated Airspeed (IAS) in m/s: " + fixedWingMetrics.getAirspeedMS());
         logger.debug("Throttle percentage: " + fixedWingMetrics.getThrottlePercentage());
         logger.debug("Climb rate (m/s): " + fixedWingMetrics.getClimbRateMS());
+
+        var odometry = telemetry.getOdometry().blockingFirst();
+        logger.debug(String.format("Velocity body (m/s): (%f,%f,%f)",
+                odometry.getVelocityBody().getXMS(),
+                odometry.getVelocityBody().getYMS(),
+                odometry.getVelocityBody().getZMS()));
+        logger.debug(String.format("Angular velocity body PYR (rad/s): (%f,%f,%f)",
+                odometry.getAngularVelocityBody().getPitchRadS(),
+                odometry.getAngularVelocityBody().getYawRadS(),
+                odometry.getAngularVelocityBody().getRollRadS()));
+        logger.debug("Position body (m/s): " + odometry.getPositionBody());
 
         var health = telemetry.getHealth().blockingFirst();
         logger.debug("Calibration (Gyrometer): " + health.getIsGyrometerCalibrationOk());
