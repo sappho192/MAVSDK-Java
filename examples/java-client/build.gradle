@@ -10,6 +10,11 @@ configurations {
     checkstyleClasspath
 }
 
+task DroneInfo(dependsOn: 'classes', type: JavaExec) {
+    main = "io.mavsdk.example.DroneInfo"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 task takeoffAndLand(dependsOn: 'classes', type: JavaExec) {
     main = "io.mavsdk.example.TakeoffAndLand"
     classpath = sourceSets.main.runtimeClasspath
